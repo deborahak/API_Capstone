@@ -1,5 +1,78 @@
-.container {
+.museums {
 	border: 10px solid blue;
 	padding: 10px;
 	margin: 0 auto;
 }
+
+.dropbtn{
+	background-color: ;
+	color: ;
+	padding: 18px;
+	font-size: 14px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+	background-color: green;
+}
+
+.cntryDropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.countryContent {
+	display: none;
+	position: absolute;
+	background-color: aqua;
+	min-width: 160px;
+	box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+}
+
+.countryContent a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.countryContent a:hover {background-color: white;}
+
+.show {display: block;}
+
+.results{
+
+}
+ul{
+	overflow: auto;
+}
+
+#museum_map{
+	width: 50%;
+	height: 400px;
+	background-color: grey;
+	float: right;
+}
+
+#result_list{
+	float: left;
+	background-color: ;
+	width: 50%;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

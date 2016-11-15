@@ -10,25 +10,50 @@
 <body>
     <div class="container">
         <div class="expo">
-        <h1>Museum Search</h1>
-        <p>Are you a history buff?  A museum addict?  Find a museum near you or near your next destination!</p>
+            <h1>Museum Search</h1>
+            <p>Are you a history buff? A museum addict? Find a museum near you or near your next destination!</p>
         </div>
         <div class="museums">
-            <form class="city-search">
-                <h1>Search by City</h1>
-                <input type="text" id="city" name="cityMuseums">
-                <input type="submit" value="Submit">
+            <h1>Country</h1>
+            <form>
+                <input list="countries" id="country" autocomplete="false">
+                <datalist id="countries">
+                    <option value="Spain"></option>
+                    <option value="France"></option>
+                    <option value="Ireland"></option>
+                </datalist>
             </form>
-            <form class="country-search">
-                <h1>Search by Country</h1>
-                <input type="text" id="country" name="countryMuseums">
-                <input type="submit" value="Submit">
-            </form>
-
+            <h1>City</h1>
+            <div class="cityDropdown">
+                <form>
+                    <!-- <input list="cities" name="cityMuseums" autocomplete="false"> -->
+                    <select id="cities">
+                    </select>
+                    <input type="submit" value="Submit" class="museumSearch">
+                </form>
+            </div>
         </div>
+        <div id="result_list">
+            <ul class="results">
+                <!-- <div class="templates-hidden">
+                <dl>
+                    <dt class="museumResults">
+                        <dd class="museum_name">
+                            <a href=""></a>
+                        </dd>
+                        <dd class="museum_image"><img src=""></dd>
+                        <dd class="map"></dd>
+                    </dt>
+                </dl>
+            </div> -->
+            </ul>
+        </div>
+        <div id="museum_map"></div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoPAyczJBDjtfnniRfl4YvCCINo4negwY&callback=initMap">
+    </script>
 </body>
 
 </html>
