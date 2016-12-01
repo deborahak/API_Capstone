@@ -5,7 +5,6 @@ var getCity = function() {
         coordinates: 'coordinates',
         url: 'url'
     };
-    // console.log(request);
     $.ajax({
             url: "http://www.muselia.com/apimuseums",
             data: request,
@@ -14,59 +13,42 @@ var getCity = function() {
         })
         .done(function(result) {
             showSearchResults(result);
-            // finished//
             initMap(result);
         });
 };
 
 
 var showSearchResults = function(museums) {
-    // what is museum? some obj
+    //museum info in ul format
     var result = $(".templates-hidden").clone();
     var html = "";
     var results = [];
     for (var i = 0; i < museums.length; i++) {
-        //console.log(museums[i]);
+
         var museumElem = result.find(".museum_name a");
-        html += "<li><a href='museums[i].url '>" + museums[i].name + "</a>" + "<br/>" + museums[i].address + "<br/>" + "<img src='" + museums[i].image + "'></li>";
-        // results.push(museumElem);
-        // console.log(museumElem);
-    }
-    // console.log(results);
+        html += "<li><a href='" + museums[i].url + "' target='_blank'>" + museums[i].name + "</a>" + "<br/>" + museums[i].address + "<br/>" + "<img src='" + museums[i].image + "'></li>";
+    };
+
     $(".results").append(html);
-    // hints: Museums is an array
-    // when we have arrays, to work with them the best way is usually
-    // by looping. We can loop using "for" loops
-
-    // var result = $(".templates-hidden").clone();
-    // var museumElem = result.find(".museum_name a");
-    // museumElem.text(?.name);
-    // museumElem.attr()
-
 };
 
 var infowindow;
 
 function initMap(locations) {
-    // this is what happens when the page is loaded
-    // extracting coordinates from the API
-    //grab lat and long from coordinates, 
+    //grab latitude and longitude from coordinates, 
     //split into location using parseFloat
-
     var location = locations[0];
     var coords = location["coordinates"].split(",");
-    var uluru = {
+    var centerpoint = {
         lat: parseFloat(coords[0]),
         lng: parseFloat(coords[1])
     };
-    //console.log(uluru);
     var map = new google.maps.Map(document.getElementById("museum_map"), {
         zoom: 10,
-        center: uluru
+        center: centerpoint
     });
     var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    //console.log(locations);
-
+    //clickable map markers
     var markers = locations.map(function(location, i) {
 
         var coords = location["coordinates"].split(",");
@@ -82,26 +64,23 @@ function initMap(locations) {
             "<h1 id='firstHeading' class='firstHeading'>" + location.name + "</h1>" +
             "<div id='bodyContent'>" + location.address + "</div>";
 
-        infowindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 200
-        });
+
         marker.addListener('click', function() {
+            console.log(infowindow);
             if (infowindow) {
                 infowindow.close();
             }
+            infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 200
+            });
             infowindow.open(map, marker);
         });
 
         return marker;
 
     });
-    //    markers.addListener("click", function(){
-    //        infowindow.open(map, marker);
-    //    });
     var markerCluster = new MarkerClusterer(map, markers, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-
-
 };
 
 
@@ -121,13 +100,11 @@ $(document).ready(function() {
     $("#country").on('input', function() {
 
         var country = this.value.toLowerCase();
-        //console.log(country);//
-        /// start here.
-        var cities = countryCity[country]; // spain
-        //console.log(cities);
+
+        var cities = countryCity[country];
+
         var html = "";
         for (var i = 0; i < cities.length; i++) {
-            // cities[0] ; or i <<-----
             html += '<option value="' + cities[i].toLowerCase() + '">' + cities[i] + '</option>';
         }
 
